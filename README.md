@@ -119,7 +119,7 @@ DeepV-Ki 支持灵活的环境变量配置，主要配置项如下：
 graph TD
     User[用户] --> Frontend[Next.js 前端]
     Frontend --> Backend[FastAPI 后端]
-    Backend --> LLM[LLM 服务 (OpenAI/Gemini)]
+    Backend --> LLM[LLM 服务 OpenAI/Gemini]
     Backend --> VectorDB[FAISS 向量库]
     Backend --> Git[Git 服务 (GitHub/GitLab)]
 ```
