@@ -29,6 +29,10 @@
       <img src="https://img.shields.io/github/issues/OrionStarAI/DeepV-Ki?style=flat-square" alt="issues">
     </a>
   </p>
+
+  <p align="center">
+    <strong>中文</strong> | <a href="README.en.md">English</a>
+  </p>
 </div>
 
 <br/>
