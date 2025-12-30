@@ -121,7 +121,7 @@ graph TD
     Frontend --> Backend[FastAPI 后端]
     Backend --> LLM[LLM 服务 OpenAI/Gemini]
     Backend --> VectorDB[FAISS 向量库]
-    Backend --> Git[Git 服务 (GitHub/GitLab)]
+    Backend --> Git[Git 服务 GitHub/GitLab]
 ```
 
 ## 📚 技术栈 (Tech Stack)
