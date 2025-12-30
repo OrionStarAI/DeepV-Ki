@@ -154,3 +154,4 @@ Thumbs.db
 # Temporary documentation/summary files (generated during analysis)
 ENV_SETUP_SUMMARY.txt
 .deepvcode  
+README.zh.md
