@@ -40,8 +40,7 @@
 无论是 GitHub、GitLab 还是 Bitbucket，DeepV-Ki 都能帮助开发者快速理解复杂的代码库。
 
 <div align="center">
-  <!-- <img src="screenshots/Deepwiki.png" alt="DeepV-Ki Interface" width="100%"> -->
-  <p><em>(Screenshot coming soon)</em></p>
+  <img src="screenshots/Deepwiki.png" alt="DeepV-Ki Interface" width="100%">
 </div>
 
 ## 🌟 核心特性 (Features)
