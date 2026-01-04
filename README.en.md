@@ -108,6 +108,7 @@ DeepV-Ki supports flexible environment variable configuration. Main configuratio
 | `GOOGLE_API_KEY` | Google Gemini API Key | `AIza...` |
 | `GITLAB_URL` | GitLab Instance URL | `https://gitlab.com` |
 | `GITLAB_CLIENT_ID` | GitLab OAuth App ID | `...` |
+| `GITLAB_REDIRECT_URI` | OAuth Callback URL (Must match GitLab App config) | `http://localhost:8001/api/auth/gitlab/callback` |
 | `PORT` | Backend Service Port | `8001` |
 
 For more configurations, please refer to the `.env.example` file.
