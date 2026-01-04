@@ -38,6 +38,6 @@ def init_gitlab_oauth(app):
         access_token_url=f'{base_url}/oauth/token',
         authorize_url=f'{base_url}/oauth/authorize',
         client_kwargs={
-            'scope': 'api read_user',
+            'scope': 'api read_user openid profile email',
         }
     )

@@ -109,6 +109,7 @@ DeepV-Ki supports flexible environment variable configuration. Main configuratio
 | `GITLAB_URL` | GitLab Instance URL | `https://gitlab.com` |
 | `GITLAB_CLIENT_ID` | GitLab OAuth App ID | `...` |
 | `GITLAB_REDIRECT_URI` | OAuth Callback URL (Must match GitLab App config) | `http://localhost:8001/api/auth/gitlab/callback` |
+| `GITLAB_SCOPES` | Required Scopes (Check these in GitLab) | `api`, `read_user`, `openid`, `profile`, `email` |
 | `PORT` | Backend Service Port | `8001` |
 
 For more configurations, please refer to the `.env.example` file.
