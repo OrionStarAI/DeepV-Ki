@@ -108,6 +108,7 @@ DeepV-Ki 支持灵活的环境变量配置，主要配置项如下：
 | `GOOGLE_API_KEY` | Google Gemini API 密钥 | `AIza...` |
 | `GITLAB_URL` | GitLab 实例地址 | `https://gitlab.com` |
 | `GITLAB_CLIENT_ID` | GitLab OAuth App ID | `...` |
+| `GITLAB_REDIRECT_URI` | OAuth 回调地址 (必须与 GitLab App 配置一致) | `http://localhost:8001/api/auth/gitlab/callback` |
 | `PORT` | 后端服务端口 | `8001` |
 
 更多配置请参考 `.env.example` 文件。
