@@ -18,6 +18,7 @@ from adalflow import GoogleGenAIClient, OllamaClient
 OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
 GOOGLE_API_KEY = os.environ.get('GOOGLE_API_KEY')
 OPENROUTER_API_KEY = os.environ.get('OPENROUTER_API_KEY')
+DASHSCOPE_API_KEY = os.environ.get('DASHSCOPE_API_KEY')
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 AWS_REGION = os.environ.get('AWS_REGION')
@@ -57,6 +58,8 @@ if GOOGLE_API_KEY:
     os.environ["GOOGLE_API_KEY"] = GOOGLE_API_KEY
 if OPENROUTER_API_KEY:
     os.environ["OPENROUTER_API_KEY"] = OPENROUTER_API_KEY
+if DASHSCOPE_API_KEY:
+    os.environ["DASHSCOPE_API_KEY"] = DASHSCOPE_API_KEY
 if AWS_ACCESS_KEY_ID:
     os.environ["AWS_ACCESS_KEY_ID"] = AWS_ACCESS_KEY_ID
 if AWS_SECRET_ACCESS_KEY:
@@ -329,11 +332,41 @@ lang_config = load_lang_config()
 
 # Update configuration
 if generator_config:
-    configs["default_provider"] = generator_config.get("default_provider", "google")
+    # Intelligent default provider selection
+    default_provider = generator_config.get("default_provider", "google")
+
+    # Check available API keys
+    has_openai = bool(OPENAI_API_KEY)
+    has_google = bool(GOOGLE_API_KEY)
+    has_openrouter = bool(OPENROUTER_API_KEY)
+    has_dashscope = bool(DASHSCOPE_API_KEY)
+
+    # If only DashScope is available, switch default to dashscope
+    if has_dashscope and not (has_openai or has_google or has_openrouter):
+        logger.info("🤖 Only DashScope API key found. Switching default provider to 'dashscope'.")
+        default_provider = "dashscope"
+
+        # Also update embedder config if needed
+        if "embedder" in configs and configs["embedder"].get("client_class") != "DashscopeClient":
+            logger.info("🔄 Switching embedder to DashScope")
+            configs["embedder"] = {
+                "client_class": "DashscopeClient",
+                "batch_size": 25,
+                "model_kwargs": {
+                    "model": "text-embedding-v3",
+                    "dimensions": 1024,
+                    "encoding_format": "float"
+                }
+            }
+            # Update configs dictionary
+            embedder_config["embedder"] = configs["embedder"]
+            # Ensure model_client is set correctly for DashScope
+            configs["embedder"]["model_client"] = DashscopeClient
+
+    configs["default_provider"] = default_provider
     configs["providers"] = generator_config.get("providers", {})
 
     # 获取默认 provider 的默认 model
-    default_provider = generator_config.get("default_provider", "google")
     if default_provider in generator_config.get("providers", {}):
         default_model = generator_config["providers"][default_provider].get("default_model")
         if default_model:
