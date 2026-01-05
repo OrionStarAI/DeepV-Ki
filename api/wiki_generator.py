@@ -135,13 +135,19 @@ def generate_wiki_structure(task: Dict[str, Any], documents_count: int, file_tre
         'anthropic/claude-haiku-4.5': 150000,   # 200K - 50K 余量（容易超限的模型）
         'openai/gpt-4-turbo': 100000,           # 128K - 28K 余量
         'openai/gpt-4o': 100000,                # 128K - 28K 余量
+        'qwen-plus': 120000,                    # DashScope Qwen-Plus
+        'qwen-max': 120000,                     # DashScope Qwen-Max
+        'qwen-turbo': 120000,                   # DashScope Qwen-Turbo
         'default': 150000
     }
 
     current_limit = model_token_limits.get(model, model_token_limits['default'])
 
     # 如果超过当前模型的限制，自动切换到 Gemini 2.5 Flash（支持 1M token）
-    if prompt_token_count > current_limit:
+    # 但如果只有 DashScope Key，不要切换到 OpenRouter
+    from api.config import OPENROUTER_API_KEY
+
+    if prompt_token_count > current_limit and OPENROUTER_API_KEY:
         logger.warning(
             f"[Task {task_id}] ⚠️ Prompt too large for {model}: "
             f"{prompt_token_count} tokens > {current_limit} limit. "
@@ -149,6 +155,11 @@ def generate_wiki_structure(task: Dict[str, Any], documents_count: int, file_tre
         )
         provider = 'openrouter'  # Google Gemini 通过 OpenRouter 使用
         model = 'google/gemini-2.5-flash'  # 1M token 上限
+    elif prompt_token_count > current_limit:
+        logger.warning(
+            f"[Task {task_id}] ⚠️ Prompt too large for {model}: {prompt_token_count} > {current_limit}. "
+            f"Cannot switch to Gemini (no OpenRouter key). Continuing with current model."
+        )
 
     # 调用 AI 生成
     generator_config = get_model_config(provider, model)
@@ -437,13 +448,19 @@ Use the above source code as the basis for generating the wiki content.
         'anthropic/claude-haiku-4.5': 150000,   # 200K - 50K 余量（容易超限的模型）
         'openai/gpt-4-turbo': 100000,           # 128K - 28K 余量
         'openai/gpt-4o': 100000,                # 128K - 28K 余量
+        'qwen-plus': 120000,                    # DashScope Qwen-Plus
+        'qwen-max': 120000,                     # DashScope Qwen-Max
+        'qwen-turbo': 120000,                   # DashScope Qwen-Turbo
         'default': 150000
     }
 
     current_limit = model_token_limits.get(model, model_token_limits['default'])
 
     # 如果超过当前模型的限制，自动切换到 Gemini 2.5 Flash（支持 1M token）
-    if prompt_token_count > current_limit:
+    # 但如果只有 DashScope Key，不要切换到 OpenRouter
+    from api.config import OPENROUTER_API_KEY
+
+    if prompt_token_count > current_limit and OPENROUTER_API_KEY:
         logger.warning(
             f"[Task {task_id}] ⚠️ Prompt too large for {model}: "
             f"{prompt_token_count} tokens > {current_limit} limit. "
@@ -451,6 +468,11 @@ Use the above source code as the basis for generating the wiki content.
         )
         provider = 'openrouter'  # Google Gemini 通过 OpenRouter 使用
         model = 'google/gemini-2.5-flash'  # 1M token 上限
+    elif prompt_token_count > current_limit:
+        logger.warning(
+            f"[Task {task_id}] ⚠️ Prompt too large for {model}: {prompt_token_count} > {current_limit}. "
+            f"Cannot switch to Gemini (no OpenRouter key). Continuing with current model."
+        )
 
     generator_config = get_model_config(provider, model)
     generator = adal.Generator(
