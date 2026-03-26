@@ -159,6 +159,17 @@ graph TD
 
 ---
 
+## 🤖 AI Collaboration Workflow (Experimental)
+
+This project is evolving towards an AI-driven development workflow:
+
+- Issues define tasks
+- AI agents (e.g., dvcode) implement features
+- Pull Requests are reviewed by humans and AI
+- Code evolves through iterative collaboration
+
+This is an experimental step toward AI-native software engineering.
+
 <div align="center">
   <p>Made with ❤️ by the DeepV-Ki Team</p>
 </div>
