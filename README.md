@@ -102,20 +102,25 @@ cp .env.example .env
 
 DeepV-Ki 支持灵活的环境变量配置，主要配置项如下：
 
-| 变量名 | 说明 | 示例 |
+| 变量名 | 说明 | 默认值 |
 | :--- | :--- | :--- |
-| `OPENAI_API_KEY` | OpenAI API 密钥 | `sk-...` |
-| `GOOGLE_API_KEY` | Google Gemini API 密钥 | `AIza...` |
-| `DASHSCOPE_API_KEY` | Aliyun DashScope API 密钥 | `sk-...` |
+| `OPENAI_API_KEY` | OpenAI API 密钥 | — |
+| `GOOGLE_API_KEY` | Google Gemini API 密钥 | — |
+| `DASHSCOPE_API_KEY` | 阿里云 DashScope API 密钥 | — |
+| `OPENROUTER_API_KEY` | OpenRouter API 密钥 | — |
 | `GITLAB_URL` | GitLab 实例地址 | `https://gitlab.com` |
-| `GITLAB_CLIENT_ID` | GitLab OAuth App ID | `...` |
+| `GITLAB_CLIENT_ID` | GitLab OAuth App ID | — |
+| `GITLAB_CLIENT_SECRET` | GitLab OAuth App Secret | — |
 | `GITLAB_REDIRECT_URI` | OAuth 回调地址 (必须与 GitLab App 配置一致) | `http://localhost:8001/api/auth/gitlab/callback` |
-| `GITLAB_SCOPES` | 必须勾选的权限 (Scopes) | `api`, `read_user` |
+| `SESSION_SECRET_KEY` | 会话加密密钥 (生产环境必须设置) | — |
 | `PORT` | 后端服务端口 | `8001` |
+| `SERVER_BASE_URL` | 后端服务 URL，前端代理请求使用 | `http://localhost:8001` |
+| `FRONTEND_URL` | 前端 URL，用于 OAuth/SSO 重定向 | `http://localhost:3000` |
+| `LOG_LEVEL` | 日志级别 | `INFO` |
 
 > 🔗 **详细指南**：遇到配置问题？请查看 [GitLab OAuth 配置指南](docs/GITLAB_OAUTH_SETUP.md)。
 
-更多配置请参考 `.env.example` 文件。
+完整的环境变量列表及说明请参考 [`.env.example`](.env.example) 文件。
 
 ## 🏗️ 系统架构 (Architecture)
 
