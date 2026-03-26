@@ -102,20 +102,25 @@ After successful startup, visit:
 
 DeepV-Ki supports flexible environment variable configuration. Main configuration items include:
 
-| Variable Name | Description | Example |
+| Variable Name | Description | Default |
 | :--- | :--- | :--- |
-| `OPENAI_API_KEY` | OpenAI API Key | `sk-...` |
-| `GOOGLE_API_KEY` | Google Gemini API Key | `AIza...` |
-| `DASHSCOPE_API_KEY` | Aliyun DashScope API Key | `sk-...` |
+| `OPENAI_API_KEY` | OpenAI API Key | — |
+| `GOOGLE_API_KEY` | Google Gemini API Key | — |
+| `DASHSCOPE_API_KEY` | Aliyun DashScope API Key | — |
+| `OPENROUTER_API_KEY` | OpenRouter API Key | — |
 | `GITLAB_URL` | GitLab Instance URL | `https://gitlab.com` |
-| `GITLAB_CLIENT_ID` | GitLab OAuth App ID | `...` |
+| `GITLAB_CLIENT_ID` | GitLab OAuth App ID | — |
+| `GITLAB_CLIENT_SECRET` | GitLab OAuth App Secret | — |
 | `GITLAB_REDIRECT_URI` | OAuth Callback URL (Must match GitLab App config) | `http://localhost:8001/api/auth/gitlab/callback` |
-| `GITLAB_SCOPES` | Required Scopes (Check these in GitLab) | `api`, `read_user` |
+| `SESSION_SECRET_KEY` | Session encryption key (must set in production) | — |
 | `PORT` | Backend Service Port | `8001` |
+| `SERVER_BASE_URL` | Backend server URL used by frontend proxy | `http://localhost:8001` |
+| `FRONTEND_URL` | Frontend URL for OAuth/SSO redirects | `http://localhost:3000` |
+| `LOG_LEVEL` | Log level | `INFO` |
 
 > 🔗 **Detailed Guide**: Having issues? Check the [GitLab OAuth Configuration Guide](docs/GITLAB_OAUTH_SETUP.md).
 
-For more configurations, please refer to the `.env.example` file.
+For the full list of environment variables with descriptions, see the [`.env.example`](.env.example) file.
 
 ## 🏗️ Architecture
 

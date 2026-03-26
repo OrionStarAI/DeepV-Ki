@@ -101,7 +101,7 @@ DeepV-Ki now uses JSON configuration files to manage various system components i
 You can customize the configuration directory location using the environment variable:
 
 ```
-DEEPVKI_CONFIG_DIR=/path/to/custom/config/dir  # Optional, for custom config file location
+DEEPWIKI_CONFIG_DIR=/path/to/custom/config/dir  # Optional, for custom config file location
 ```
 
 This allows you to maintain different configurations for various environments or deployment scenarios without modifying the code.
